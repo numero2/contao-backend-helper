@@ -5,12 +5,11 @@
     <trans-unit id="tl_page.backend_helper">
         <target>Backend Helper</target>
     </trans-unit>
-    <!-- FIELDS -->
     <trans-unit id="tl_page.bh_info.0">
         <target>Backend Information</target>
     </trans-unit>
-    <trans-unit id="tl_page.bh-info.1">
-        <target>Hier können Sie eine Information hinterlegen den Sie dann im Backend angezeigt wird.</target>
+    <trans-unit id="tl_page.bh_info.1">
+        <target>Hier können Sie eine Information hinterlegen welche im Seitenbaum angezeigt wird.</target>
     </trans-unit>
 </body>
 </file>
