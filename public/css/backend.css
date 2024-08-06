@@ -1,0 +1,9 @@
+.bh_info {
+  display: inline-block;
+  padding: 2px 1ch;
+  margin-left: 1ch;
+  font-size: 12px;
+  background: rgba(255, 252, 225, 0.6);
+  border: 1px solid #d68c23;
+  border-radius: 3px;
+}

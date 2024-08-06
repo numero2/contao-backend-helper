@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+
+
+    numero2_backend_helper.listener.data_container.page:
+        class: numero2\BackendHelperBundle\EventListener\DataContainer\PageListener
+        arguments:
+            - '@request_stack'
+            - '@contao.routing.scope_matcher'

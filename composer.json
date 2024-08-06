@@ -1,0 +1,39 @@
+{
+    "name": "numero2/contao-backend-helper",
+    "type": "contao-bundle",
+    "description": "Adds some helpers in the Contao backend.",
+    "keywords": ["backend", "information", "helper"],
+    "license": "LGPL-3.0-or-later",
+    "authors": [{
+            "name": "numero2 - Agentur für digitales Marketing GbR",
+            "homepage": "https://www.numero2.de"
+        }
+    ],
+    "require": {
+        "contao/core-bundle": "^4.13"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "extra": {
+        "contao-manager-plugin": "numero2\\BackendHelperBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "numero2\\BackendHelperBundle\\": "src/"
+        },
+        "classmap": [
+            "contao/"
+        ],
+        "exclude-from-classmap": [
+            "contao/config/",
+            "contao/dca/",
+            "contao/languages/",
+            "contao/templates/"
+        ]
+    }
+}
