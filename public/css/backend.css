@@ -7,3 +7,9 @@
   border: 1px solid #d68c23;
   border-radius: 3px;
 }
+
+html[data-color-scheme="dark"] .bh_info {
+  color: var(--text);
+  background: var(--nav-separator);
+  border-color: var(--orange);
+}
