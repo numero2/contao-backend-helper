@@ -11,7 +11,7 @@ Coming soon 😊
 
 ## System requirements
 
-* [Contao 4.13](https://github.com/contao/contao)
+* [Contao 4.13 / Contao 5.x](https://github.com/contao/contao)
 
 
 ## Installation & Configuration
