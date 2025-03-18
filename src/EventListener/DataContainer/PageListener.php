@@ -6,7 +6,7 @@
  * @author    Benny Born <benny.born@numero2.de>
  * @author    Michael Bösherz <michael.boesherz@numero2.de>
  * @license   LGPL-3.0-or-later
- * @copyright Copyright (c) 2024, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2025, numero2 - Agentur für digitales Marketing GbR
  */
 
 
@@ -60,51 +60,83 @@ class PageListener {
             ->addField(['bh_info'], 'expert_legend', 'append')
         ;
 
-        foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $key => $value ) {
+        foreach( $GLOBALS['TL_DCA'][$dc->table]['palettes'] as $key => $value ) {
 
             if( in_array($key, ['__selector__', 'default']) ) {
                 continue;
             }
 
-            $pm->applyToPalette($key, 'tl_page');
+            $pm->applyToPalette($key, $dc->table);
         }
+    }
+
+
+    /**
+     * Sets the new label callback with respect to any previously added ones
+     *
+     * @param Contao\DataContainer $dc
+     *
+     * @Callback(table="tl_page", target="config.onload")
+     */
+    public function setLabelCallback( $dc ) {
+
+        $previousCallback = $GLOBALS['TL_DCA'][$dc->table]['list']['label']['label_callback'] ?? null;
+
+        $callback = [$this, 'addBackendHelperInfos'];
+
+        $GLOBALS['TL_DCA'][$dc->table]['list']['label']['label_callback'] = function () use ($callback, $previousCallback) {
+
+            $args = \func_get_args();
+            $result = null;
+
+            if( \is_callable($previousCallback) || \is_array($previousCallback) ) {
+                $result = $this->executeCallback($previousCallback, $args);
+            }
+
+            return $this->executeCallback($callback, [$args, $result]);
+        };
+    }
+
+
+    /**
+     * @param callable|array<string, string> $callback
+     * @param array<mixed> $args
+     *
+     * @return mixed
+     */
+    private function executeCallback( $callback, array $args ) {
+
+        if( \is_array($callback) ) {
+
+            return \call_user_func_array(
+                [System::importStatic($callback[0]), $callback[1]],
+                $args,
+            );
+        }
+
+        return $callback(...$args);
     }
 
 
     /**
      * Add backend helper information to the label
      *
-	 * @param array $row
+	 * @param array $args
 	 * @param string $label
-	 * @param Contao\DataContainer $dc
-	 * @param string $imageAttribute
-	 * @param boolean $blnReturnImage
-	 * @param boolean $blnProtected
-	 * @param boolean $isVisibleRootTrailPage
 	 *
 	 * @return string
-     *
-     * @Callback(table="tl_page", target="list.label.label")
      */
-	public function addBackendHelperInfos( $row, $label, DataContainer|null $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false, $isVisibleRootTrailPage=false ) {
-
-        $t = System::importStatic('tl_page');
-
-        if( method_exists($t, 'addIcon') ) {
-            $defaultLabel = $t->addIcon(...func_get_args());
-        }
+	public function addBackendHelperInfos( array $args, string $label ): string {
 
         $request = $this->requestStack->getCurrentRequest();
         if( !$request || !$this->scopeMatcher->isBackendRequest($request) ) {
-            return $defaultLabel;
+            return $label;
         }
 
-        if( !empty($row['bh_info']) ) {
-
-            $info = '<span class="bh_info">' . $row['bh_info'] . '</span>';
-            $defaultLabel = preg_replace("%</a>$%", $info.'</a>', $defaultLabel);
+        if( !empty($args[0]['bh_info']) ) {
+            $label .= '<span class="bh_info">' . $args[0]['bh_info'] . '</span>';
         }
 
-        return $defaultLabel;
+        return $label;
 	}
 }
