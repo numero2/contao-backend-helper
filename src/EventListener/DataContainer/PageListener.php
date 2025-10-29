@@ -48,6 +48,7 @@ class PageListener {
      * @param Contao\DataContainer $dc
      *
      * @Callback(table="tl_page", target="config.onload")
+     * @Callback(table="tl_article", target="config.onload")
      */
     public function addBackendHelperFields( $dc ) {
 
@@ -62,7 +63,7 @@ class PageListener {
 
         foreach( $GLOBALS['TL_DCA'][$dc->table]['palettes'] as $key => $value ) {
 
-            if( in_array($key, ['__selector__', 'default']) ) {
+            if( in_array($key, ['__selector__']) ) {
                 continue;
             }
 
@@ -77,6 +78,7 @@ class PageListener {
      * @param Contao\DataContainer $dc
      *
      * @Callback(table="tl_page", target="config.onload")
+     * @Callback(table="tl_article", target="config.onload")
      */
     public function setLabelCallback( $dc ) {
 
@@ -95,6 +97,22 @@ class PageListener {
 
             return $this->executeCallback($callback, [$args, $result]);
         };
+    }
+
+
+    /**
+     * Sets the new label callback with respect to any previously added ones
+     * for tl_article specifically. Needed since all the tl_page callbacks do not get triggered
+     * if we're in tl_article
+     *
+     * @param Contao\DataContainer $dc
+     *
+     * @Callback(table="tl_article", target="config.onload")
+     */
+    public function setLabelCallbackForPagesInArticles( $dc ) {
+
+        $dc->table = 'tl_page';
+        return $this->setLabelCallback($dc);
     }
 
 

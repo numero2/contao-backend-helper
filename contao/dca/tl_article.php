@@ -11,9 +11,9 @@
 
 
 /**
- * Add fields to tl_page
+ * Add fields to tl_article
  */
-$GLOBALS['TL_DCA']['tl_page']['fields']['bh_info'] = [
+$GLOBALS['TL_DCA']['tl_article']['fields']['bh_info'] = [
     'inputType'             => 'text'
 ,   'label'                 => $GLOBALS['TL_LANG']['MSC']['bh_info']
 ,   'exclude'               => true
