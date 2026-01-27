@@ -15,7 +15,7 @@
  */
 $GLOBALS['TL_DCA']['tl_article']['fields']['bh_info'] = [
     'inputType'             => 'text'
-,   'label'                 => $GLOBALS['TL_LANG']['MSC']['bh_info']
+,   'label'                 => &$GLOBALS['TL_LANG']['MSC']['bh_info']
 ,   'exclude'               => true
 ,   'eval'                  => ['maxlength'=>255, 'doNotCopy'=>true, 'tl_class'=>'w50']
 ,   'sql'                   => "varchar(255) NOT NULL default ''"
