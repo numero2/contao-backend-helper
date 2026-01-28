@@ -139,12 +139,12 @@ class PageListener {
     /**
      * Add backend helper information to the label
      *
-	 * @param array $args
-	 * @param string $label
-	 *
-	 * @return string
+     * @param array $args
+     * @param string $label
+     *
+     * @return string
      */
-	public function addBackendHelperInfos( array $args, string $label ): string {
+    public function addBackendHelperInfos( array $args, string $label ): string {
 
         $request = $this->requestStack->getCurrentRequest();
         if( !$request || !$this->scopeMatcher->isBackendRequest($request) ) {
@@ -156,5 +156,5 @@ class PageListener {
         }
 
         return $label;
-	}
+    }
 }

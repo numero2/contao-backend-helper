@@ -10,19 +10,10 @@
  */
 
 
-namespace numero2\BackendHelperBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-
-class BackendHelperBundle extends Bundle {
+use ShipMonk\ComposerDependencyAnalyser\Config\Configuration;
+use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath(): string {
-
-        return \dirname(__DIR__);
-    }
-}
+return (new Configuration())
+    ->ignoreErrorsOnPackage('contao/manager-plugin', [ErrorType::DEV_DEPENDENCY_IN_PROD])
+;
