@@ -112,7 +112,8 @@ class PageListener {
     public function setLabelCallbackForPagesInArticles( $dc ) {
 
         $dc->table = 'tl_page';
-        return $this->setLabelCallback($dc);
+        $this->setLabelCallback($dc);
+        $dc->table = 'tl_article';
     }
 
 
