@@ -21,9 +21,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class KernelRequestSubscriber implements EventSubscriberInterface {
 
 
-    /**
-     * @var Contao\CoreBundle\Routing\ScopeMatcher
-     */
     protected ScopeMatcher $scopeMatcher;
 
 
@@ -46,6 +43,7 @@ class KernelRequestSubscriber implements EventSubscriberInterface {
         if( $this->scopeMatcher->isBackendRequest($request) ) {
 
             $GLOBALS['TL_CSS'][] = 'bundles/backendhelper/css/backend.css';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/backendhelper/js/backend.js';
         }
     }
 }

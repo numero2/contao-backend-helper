@@ -1,38 +1,48 @@
 <?xml version="1.0"?>
 <xliff version="1.1">
-<file source-language="en">
+<file source-language="en" target-language="de">
 <body>
     <!-- MISCELLANEOUS -->
     <trans-unit id="MSC.backend_helper.info.0">
         <source>Backend Information</source>
+        <target>Backend Information</target>
     </trans-unit>
     <trans-unit id="MSC.backend_helper.info.1">
         <source>Here you can store information that will be displayed in the site tree.</source>
+        <target>Hier können Sie eine Information hinterlegen welche im Seitenbaum angezeigt wird.</target>
     </trans-unit>
     <trans-unit id="MSC.backend_helper.menu_longwords">
         <source>Highlight long words</source>
+        <target>Zu lange Wörter hervorheben</target>
     </trans-unit>
     <!-- ERROR -->
     <trans-unit id="ERR.backend_helper.a11y_img_require_alt">
         <source>Please provide an alt text for this image.</source>
+        <target>Bitte hinterlegen Sie einen Alternativtext für dieses Bild.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_img_require_caption">
         <source>Please provide a caption for this image.</source>
+        <target>Bitte hinterlegen Sie eine Bildunterschrift für dieses Bild.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_img_require_alt_and_caption">
         <source>Please provide an alt text and a caption for this image.</source>
+        <target>Bitte hinterlegen Sie einen Alternativtext und eine Bildunterschrift für dieses Bild.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_multi_require_alt">
         <source>Please provide an alt text for the following images: %s.</source>
+        <target>Bitte hinterlegen Sie einen Alternativtext für die folgenden Bilder: %s.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_multi_require_caption">
         <source>Please provide a caption for the following images: %s.</source>
+        <target>Bitte hinterlegen Sie eine Bildunterschrift für die folgenden Bilder: %s.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_img_require_title">
         <source>Please provide a title for this image.</source>
+        <target>Bitte hinterlegen Sie einen Titel für dieses Bild.</target>
     </trans-unit>
     <trans-unit id="ERR.backend_helper.a11y_multi_require_title">
         <source>Please provide a title for the following images: %s.</source>
+        <target>Bitte hinterlegen Sie einen Titel für die folgenden Bilder: %s.</target>
     </trans-unit>
 </body>
 </file>

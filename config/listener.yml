@@ -1,10 +1,27 @@
 services:
     _defaults:
         public: true
+        autoconfigure: true
 
+
+    numero2\BackendHelperBundle\EventListener\DataContainer\A11yEnforcerListener:
+        arguments:
+            - '@request_stack'
+            - '@contao.filesystem.virtual.files'
+            - '@translator'
+            - '%numero2_backend_helper.a11y_enforcer.enabled%'
+            - '%numero2_backend_helper.a11y_enforcer.images%'
 
     numero2_backend_helper.listener.data_container.page:
         class: numero2\BackendHelperBundle\EventListener\DataContainer\PageListener
         arguments:
             - '@request_stack'
             - '@contao.routing.scope_matcher'
+
+    numero2_backend_helper.listener.menu.backend_header:
+        class: numero2\BackendHelperBundle\EventListener\Menu\BackendHeaderListener
+        arguments:
+            - '@security.helper'
+            - '@translator'
+            - '%numero2_backend_helper.long_word_highlighter.enabled%'
+            - '%numero2_backend_helper.long_word_highlighter.min_length%'

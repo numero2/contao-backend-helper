@@ -6,16 +6,16 @@
  * @author    Benny Born <benny.born@numero2.de>
  * @author    Michael Bösherz <michael.boesherz@numero2.de>
  * @license   LGPL-3.0-or-later
- * @copyright Copyright (c) 2025, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2026, numero2 - Agentur für digitales Marketing GbR
  */
 
 
 namespace numero2\BackendHelperBundle\EventListener\DataContainer;
 
-use Contao\Backend;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\CoreBundle\Routing\ScopeMatcher;
-use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\System;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,14 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PageListener {
 
 
-    /**
-     * @var Symfony\Component\HttpFoundation\RequestStack
-     */
     private RequestStack $requestStack;
-
-    /**
-     * @var Contao\CoreBundle\Routing\ScopeMatcher
-     */
     private ScopeMatcher $scopeMatcher;
 
 
@@ -43,13 +36,35 @@ class PageListener {
 
 
     /**
+     * Registers the bh_info field definition when tl_page or tl_article is loaded.
+     *
+     * @param string $table
+     */
+    #[AsHook('loadDataContainer')]
+    public function registerFields( string $table ): void {
+
+        if( !in_array($table, ['tl_page', 'tl_article'], true) ) {
+            return;
+        }
+
+        $GLOBALS['TL_DCA'][$table]['fields']['bh_info'] = [
+            'inputType' => 'text',
+            'label'     => &$GLOBALS['TL_LANG']['MSC']['backend_helper']['info'],
+            'exclude'   => true,
+            'eval'      => ['maxlength' => 255, 'tl_class' => 'w50'],
+            'sql'       => "varchar(255) NOT NULL default ''",
+        ];
+    }
+
+
+    /**
      * Add fields for backend helper
      *
      * @param Contao\DataContainer $dc
      *
-     * @Callback(table="tl_page", target="config.onload")
-     * @Callback(table="tl_article", target="config.onload")
      */
+    #[AsCallback('tl_page', target: 'config.onload')]
+    #[AsCallback('tl_article', target: 'config.onload')]
     public function addBackendHelperFields( $dc ) {
 
         $request = $this->requestStack->getCurrentRequest();
@@ -77,9 +92,9 @@ class PageListener {
      *
      * @param Contao\DataContainer $dc
      *
-     * @Callback(table="tl_page", target="config.onload")
-     * @Callback(table="tl_article", target="config.onload")
      */
+    #[AsCallback('tl_page', target: 'config.onload')]
+    #[AsCallback('tl_article', target: 'config.onload')]
     public function setLabelCallback( $dc ) {
 
         $previousCallback = $GLOBALS['TL_DCA'][$dc->table]['list']['label']['label_callback'] ?? null;
@@ -107,8 +122,8 @@ class PageListener {
      *
      * @param Contao\DataContainer $dc
      *
-     * @Callback(table="tl_article", target="config.onload")
      */
+    #[AsCallback('tl_article', target: 'config.onload')]
     public function setLabelCallbackForPagesInArticles( $dc ) {
 
         $dc->table = 'tl_page';

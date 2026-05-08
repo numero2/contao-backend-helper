@@ -1,3 +1,7 @@
+:root {
+    --icon-bh-lwh: url(../img/icon-lwh.svg);
+}
+
 .bh_info {
 
     display: inline-block;
@@ -13,7 +17,65 @@
     border-radius: 3px;
 }
 
+#tmenu #bhLwhToggle {
+
+    position: relative;
+
+    display: inline-block;
+    width: 40px;
+    overflow: hidden;
+    margin: 5px 0;
+    padding: 8px 6px;
+
+    font-size: .875rem;
+    white-space: nowrap;
+    color: var(--header-text);
+    text-indent: 40px;
+
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: var(--icon-bh-lwh) center center no-repeat;
+
+    transition: background-color .3s ease;
+
+    &:hover {
+        background-color: var(--nav-bg-hover);
+    }
+
+    &[data-state="active"]:after {
+
+        content: "";
+
+        position: absolute;
+        z-index: 1;
+        top: 3px;
+        right: 2px;
+
+        display: block;
+        width: 12px;
+        height: 12px;
+
+        background: url(../img/circle-check.svg) no-repeat scroll 50% 50%;
+        background-size: contain;
+    }
+}
+
+.bh-lwh-overlay {
+
+    position: absolute;
+    z-index: 999;
+
+    box-sizing: border-box;
+    pointer-events: none;
+
+    border: 2px solid #0f0;
+    background: transparent;
+}
+
 html[data-color-scheme="dark"] {
+
+    --icon-bh-lwh: url(../img/icon-lwh--dark.svg);
 
     .bh_info {
 
@@ -21,5 +83,4 @@ html[data-color-scheme="dark"] {
         background: var(--nav-separator);
         border-color: var(--orange);
     }
-
 }
