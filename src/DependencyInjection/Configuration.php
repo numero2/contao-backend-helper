@@ -69,7 +69,7 @@ class Configuration implements ConfigurationInterface {
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultFalse()->end()
-                        ->integerNode('min_length')->defaultValue(10)->end()
+                        ->integerNode('min_length')->defaultValue(15)->end()
                     ->end()
                 ->end()
             ->end()

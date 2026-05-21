@@ -43,7 +43,7 @@
                     }
 
                     window.ContaoBackendHelper.lwhInstance = new window.LongWordHighlighter({
-                        minLength: 10,
+                        minLength: button.dataset.minLength,
                         selectors: [
                             '#main .content form input',
                             '#main .content form textarea',
